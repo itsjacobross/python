@@ -44,7 +44,6 @@ while play:
                 glRotatef(-10, 0, 1, 0)
             if event.key == pygame.K_RIGHT:
                 glRotatef(10, 0, 1, 0)
-
             if event.key == pygame.K_UP:
                 glRotatef(-10, 1, 0, 0)
             if event.key == pygame.K_DOWN:
@@ -59,27 +58,30 @@ while play:
 
     glRotatef(0.10, 0, 1, 0)
     # glTranslatef(0, 0.1, 0)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+    glEnable(GL_BLEND)
+    glClearColor(0.0, 0.0, 0.0, 0.0)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
     terrain()
 
-    if 0 < sim_time <= 1000:
-        Firework.f1.render
-    if 500 < sim_time <= 1500:
-        Firework.f2.render
-        Firework.f3.render
+    if 0 < sim_time <= 750:
+        f1.render()
+    if 500 < sim_time <= 1250:
+        f2.render()
+        f3.render()
     if 1000 < sim_time <= 1500:
-        Firework.f4.render
-        Firework.f5.render
+        f4.render()
+        f5.render()
     if 1500 < sim_time:
         sim_time = 0
 
     if sim_time == 0:
         f1 = Firework.Firework()
-        f2 = Firework.Firework()
-        f3 = Firework.Firework()
-        f4 = Firework.Firework()
-        f5 = Firework.Firework()
+        f2 = Firework.Firework(x=5,z=5)
+        f3 = Firework.Firework(x=-5,z=-5)
+        f4 = Firework.Firework(x=5,z=-5)
+        f5 = Firework.Firework(x=-5,z=5)
 
     pygame.display.flip()
     sim_time += 1
